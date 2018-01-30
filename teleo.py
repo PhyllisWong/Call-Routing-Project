@@ -13,13 +13,18 @@ def read_routes(phone):
     with open("route-costs-106000.txt", "r") as f:
         for line in f:
             line = line.rstrip('\n')
-            if phone == line:
-                print(line)
+            line.split(",")
+            if line[0] in phone:
+
                 found = True
+                line = ''.join(line)
+                print(line)
+            with open("route-costs-1.txt", "w") as result:
+                result.write("{}\n".format(line))
+                result.close()
                 break
     if not found:
         print("Nothing found")
-
 
 
 def read_one_num():
@@ -30,4 +35,4 @@ def read_one_num():
 
 if __name__ == "__main__":
     phone = read_one_num()
-    read_routes(phone)
+    cost = read_routes(phone)
