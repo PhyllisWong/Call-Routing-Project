@@ -19,23 +19,29 @@ def make_dictionary_from_file():
     routes_dict = {}
     with open(routes, "r") as f:
         for line in f:
+            # consider duplicates
             line = line.rstrip('\n')
             route = line.split(',')
             routes_dict[route[0]] = route[1]
     # print(routes_dict)
+    with open("route-dict.txt", "w") as result:
+            result.write("{}\n".format(routes_dict))
     return routes_dict
 
 
 def search_routes(routes_dict, phone):
     ph_str = str(phone)
     print(ph_str)
+    # print('this is phone number before: ', ph_str)
     found = False
     n = len(ph_str)
 
     while len(ph_str) > 0:
         ph_str = ph_str[:n]
+        # print('this is phone number after: ', ph_str)
         print('Updated phone: {}'.format(ph_str[:n]))
-        if ph_str in routes_dict:
+        # if ph_str in routes_dict:
+        if ph_str in routes_dict[ph_str]:
             print('FOUND IT!')
             found = True
             return routes_dict[ph_str]
